@@ -8,12 +8,14 @@ import {
   Title,
   Tooltip,
   Legend,
+  PointElement,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
+
   LineElement,
   Title,
   Tooltip,
@@ -26,10 +28,10 @@ const Graph = ({ graphData }) => {
     <>
       <Line
         data={{
-          labels: [1, 4, 5],
+          labels: graphData.map((i) => i[0]),
           datasets: [
             {
-              data: [5, 6, 7],
+              data: graphData.map((i) => i[1]),
               label: "wpm",
               borderColor: "white",
             },

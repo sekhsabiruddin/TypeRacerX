@@ -6,7 +6,7 @@ import Stats from "./Stats";
 
 const TypingBox = () => {
   const { testTime } = useTestMode();
-  console.log("tesTime", testTime);
+
   const [countDwon, setCountDwon] = useState(testTime);
   const [testStart, setTestStart] = useState(false);
   const [testEnd, setTestEnd] = useState(false);
@@ -19,7 +19,7 @@ const TypingBox = () => {
 
   const [correctChars, setCorrectChars] = useState(0);
   const [incorrectChar, setIncorrectChars] = useState(0);
-  const [extraChars, setextraChars] = useState(0);
+  const [extraChars, setExtraChars] = useState(0);
   const [missedChars, setMissedChars] = useState(0);
   const [correctWords, setCorrectWords] = useState(0);
 
@@ -32,7 +32,7 @@ const TypingBox = () => {
   const wordSpanRef = useMemo(() => {
     return Array(wordsArray.length)
       .fill(0)
-      .map(() => createRef());
+      .map(() => createRef(null));
   }, [wordsArray]);
   //================>setTimer start here Function <=================
   const startTimer = () => {
@@ -41,11 +41,14 @@ const TypingBox = () => {
     function timer() {
       setCountDwon((lastestCountDown) => {
         setCorrectChars((correctChars) => {
+          console.log("Graph Data is ", graphData);
           setGraphData((graphData) => {
             return [
               ...graphData,
-              testTime - lastestCountDown + 1,
-              correctChars / 5 / ((testTime - lastestCountDown + 1) / 60),
+              [
+                testTime - lastestCountDown + 1,
+                correctChars / 5 / ((testTime - lastestCountDown + 1) / 60),
+              ],
             ];
           });
           return correctChars;
@@ -54,6 +57,7 @@ const TypingBox = () => {
         if (lastestCountDown === 1) {
           setTestEnd(true);
           clearInterval(intervalId);
+          removeFocus();
         }
         return lastestCountDown - 1;
       });
@@ -91,7 +95,7 @@ const TypingBox = () => {
       wordSpanRef[0].current.childNodes[0].className = "current";
     }
   };
-
+  //**************************HandeleUseinout ********************* */
   const handleUserInput = (e) => {
     const allCurrChars = wordSpanRef[currWordIndex].current.childNodes;
     if (!testStart) {
@@ -103,37 +107,54 @@ const TypingBox = () => {
     // type the space it  will handle this logic
 
     if (e.keyCode === 32) {
-      console.log("Space is hitting");
+      // console.log("Space is hitting");
+
       let correctCharsInword =
         wordSpanRef[currWordIndex].current.querySelectorAll(".correct");
+
       if (correctCharsInword.length === allCurrChars.length) {
         setCorrectWords(correctWords + 1);
       }
 
       if (allCurrChars.length <= currCharIndex) {
         //remove cursor from the last place in a word
+
         allCurrChars[currCharIndex - 1].classList.remove("current-right");
       } else {
-        //remove cursor from in between of the word
+        //this handle beacause use is type space between the word .
+        // remove current class. we know that current class cursor blinking class
+
         allCurrChars[currCharIndex].classList.remove("current");
         setMissedChars(missedChars + (allCurrChars.length - currCharIndex));
       }
+      //remove cursor from one word to another word after press the space
       wordSpanRef[currWordIndex + 1].current.childNodes[0].className =
         "current";
+
       setCurrWordIndex(currWordIndex + 1);
+
       setCurrCharIndex(0);
+
       return;
     }
     //<======space heandle logic end here =====>
 
     //<============= Backspace logic start here============>
     if (e.keyCode === 8) {
-      console.log("backspace is hitting");
+      // console.log("backspace is hitting");
       if (currCharIndex !== 0) {
         //it is handle the let assume if the cursor
         //is pointing the the word that this will be handle
         if (allCurrChars.length === currCharIndex) {
-          allCurrChars[currCharIndex - 1].className = "current";
+          // allCurrChars[currCharIndex - 1].className = "current";
+          // setCurrCharIndex(currCharIndex - 1);
+          // return;
+          if (allCurrChars[currCharIndex - 1].className.includes("extra")) {
+            allCurrChars[currCharIndex - 1].remove();
+            allCurrChars[currCharIndex - 2].sclassName += " current-right";
+          } else {
+            allCurrChars[currCharIndex - 1].className = "current";
+          }
           setCurrCharIndex(currCharIndex - 1);
           return;
         }
@@ -149,14 +170,13 @@ const TypingBox = () => {
     // debugger;
 
     if (currCharIndex === allCurrChars.length) {
-      debugger;
       let newSpan = document.createElement("span");
       newSpan.innerText = e.key;
       newSpan.className = "incorrect extra current-right";
       allCurrChars[currCharIndex - 1].classList.remove("current-right");
-      wordSpanRef[currCharIndex].current.append(newSpan);
+      wordSpanRef[currWordIndex].current.append(newSpan);
       setCurrCharIndex(currCharIndex + 1);
-      setextraChars(extraChars + 1);
+      setExtraChars(extraChars + 1);
       return;
     }
     //=========================>user not type Space end ==================>
@@ -177,24 +197,29 @@ const TypingBox = () => {
     if (currCharIndex + 1 === allCurrChars.length) {
       allCurrChars[currCharIndex].className += " current-right";
     } else {
+      //it use for remove the cursor in normal case
       allCurrChars[currCharIndex + 1].className = "current";
     }
 
     setCurrCharIndex(currCharIndex + 1);
   };
 
-  //=============>calculate watch per minitues<=================
+  //=============>calculate word per minitues<=================
   const calculateWPM = () => {
+    // console.log("correctChars", correctChars);
     return Math.round(correctChars / 5 / (testTime / 60));
   };
   const calculateAcc = () => {
+    // console.log("Acc", (correctWords / currWordIndex) * 100);
     return Math.round((correctWords / currWordIndex) * 100);
   };
 
   const focusInput = () => {
     inputRef.current.focus();
   };
-
+  const removeFocus = () => {
+    inputRef.current.blur();
+  };
   useEffect(() => {
     // setCountDwon(testTime);
     resetTest();
@@ -206,7 +231,9 @@ const TypingBox = () => {
       wordSpanRef[0].current &&
       wordSpanRef[0].current.childNodes.length > 0
     ) {
+      // let x = wordSpanRef[0].current.childNodes[0];
       wordSpanRef[0].current.childNodes[0].className = "current";
+      // console.log("ref", wordSpanRef[0].current.childNodes[0]);
     }
   }, []);
 

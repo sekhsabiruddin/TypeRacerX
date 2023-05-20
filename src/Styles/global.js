@@ -33,7 +33,7 @@ ${"" /* //css TypingBox css start here */}
   margin-left:auto;
   margin-right:auto;
   overflow:hidden;
-  border:1px solid #fff;
+ 
 }
 .words{
   font-size:32px;
@@ -46,12 +46,11 @@ ${"" /* //css TypingBox css start here */}
 }
   
 .hidden-input{
- ${"" /* opacity:0; */}
- border:3px solid hotpink;
+  opacity:0; 
 }
-
 .current {
-  border-left: 1px solid #fff;
+  border-left:1px solid #fff;
+  height: 10px;
   animation: blinking 2s infinite;
 }
 
@@ -72,13 +71,14 @@ ${"" /* //css TypingBox css start here */}
     border-left-color: white;
   }
 }
+
 
 .current-right {
   border-right: 1px solid #fff;
-  animation: blinking 2s infinite;
+  animation: blinkingRight 2s infinite;
 }
 
-@keyframes blinking {
+@keyframes blinkingRight {
   0% {
     border-right-color: white;
   }
@@ -94,7 +94,7 @@ ${"" /* //css TypingBox css start here */}
   100% {
     border-right-color: white;
   }
-}
+} 
 
 
 
@@ -176,5 +176,52 @@ ${"" /* ==================>css for header<=================== */}
   justify-content:space-between;
   margin-left:auto;
   margin-right:auto;
+}
+${"" /* //=================================userPage====== */}
+.user-profile{
+  width:1000px;
+  margin:auto ;
+  display:flex;
+  height:15rem;
+  background:${({ theme }) => theme.typeBoxText};
+  border-radius:20px;
+  padding:1rem;
+  justify-content:center;
+  align-text:center;
+}
+.user{
+  width:50%;
+  display:flex;
+  margin-top:30px;
+  margin-bottom:30px;
+  font-size:1.5rem;
+  padding:1rem;
+  color:#fff;
+  border-right:2px solid;
+}
+.info{
+  width:60%;
+  padding:1rem;
+}
+.pictures{
+  width:40%;
+}
+.total-tests{
+  width:50%;
+  color:#fff;
+  font-size:3rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.table,.graph-user-page{
+  margin:auto;
+  width:1000px;
+}
+.center-of-screen{
+  display:flex;
+  min-height:100vh;
+  justify-content:center;
+  align-items:center;s
 }
 `;
