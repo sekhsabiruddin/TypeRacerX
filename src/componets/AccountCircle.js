@@ -86,13 +86,15 @@ const AccountCircle = () => {
               <Tab
                 label="login"
                 style={{
-                  color: theme.textColor,
+                  color: theme.typeTextColor,
+                  fontFamily: "Roboto mono",
                 }}
               ></Tab>
               <Tab
                 label="singup"
                 style={{
-                  color: theme.textColor,
+                  color: theme.typeTextColor,
+                  fontFamily: "Roboto mono",
                 }}
               ></Tab>
             </Tabs>

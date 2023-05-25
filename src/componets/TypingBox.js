@@ -108,7 +108,7 @@ const TypingBox = () => {
 
     if (e.keyCode === 32) {
       // console.log("Space is hitting");
-
+      debugger;
       let correctCharsInword =
         wordSpanRef[currWordIndex].current.querySelectorAll(".correct");
 
@@ -117,7 +117,8 @@ const TypingBox = () => {
       }
 
       if (allCurrChars.length <= currCharIndex) {
-        //remove cursor from the last place in a word
+        //remove cursor from the last place in a next word
+        let x = allCurrChars[currCharIndex - 1];
 
         allCurrChars[currCharIndex - 1].classList.remove("current-right");
       } else {
@@ -239,7 +240,8 @@ const TypingBox = () => {
 
   return (
     <div>
-      <UpperMenu countDown={countDwon} />
+      {/* <UpperMenu countDown={countDwon} /> */}
+
       {testEnd ? (
         <Stats
           wpm={calculateWPM()}
@@ -251,17 +253,20 @@ const TypingBox = () => {
           graphData={graphData}
         />
       ) : (
-        <div className="type-box" onClick={focusInput}>
-          <div className="words">
-            {wordsArray.map((word, index) => (
-              <span className="word" ref={wordSpanRef[index]} key={index}>
-                {word.split("").map((char, charIndex) => (
-                  <span key={charIndex}>{char}</span>
-                ))}
-              </span>
-            ))}
+        <>
+          <UpperMenu countDown={countDwon} />
+          <div className="type-box" onClick={focusInput}>
+            <div className="words">
+              {wordsArray.map((word, index) => (
+                <span className="word" ref={wordSpanRef[index]} key={index}>
+                  {word.split("").map((char, charIndex) => (
+                    <span key={charIndex}>{char}</span>
+                  ))}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
+        </>
       )}
       <input
         type="text"

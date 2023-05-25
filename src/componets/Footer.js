@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { themeOptions } from "../Utils/themeOptions";
 import { useTheme } from "../Context/ThemeContext";
-
+import { FaPalette } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faCode } from "@fortawesome/free-solid-svg-icons";
+import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import "@fortawesome/fontawesome-free/css/all.css";
+import ColorBox from "./ColorBox";
 const Footer = () => {
   const { setTheme } = useTheme();
 
@@ -18,24 +25,26 @@ const Footer = () => {
 
   const [selectedValue, setSelectedValue] = useState(null);
 
-  const handleChange = (selectedOption) => {
-    setTheme(selectedOption.value);
-    setSelectedValue(selectedOption);
-    console.log("color", selectedOption.value);
-    localStorage.setItem("theme", JSON.stringify(selectedOption.value));
-  };
-
   return (
     <div className="footer">
-      <div className="links">links</div>
+      <div className="links">
+        <div>
+          <FontAwesomeIcon icon={faEnvelope} />
+          <span>contact</span>
+        </div>
+
+        <div>
+          <FontAwesomeIcon icon={faLinkedin} />
+          <span>Linkeden</span>
+        </div>
+
+        <div>
+          <FontAwesomeIcon icon={faCode} />
+          <span>Github</span>
+        </div>
+      </div>
       <div className="themeButton">
-        <Select
-          value={selectedValue}
-          onChange={handleChange}
-          options={themeOptions} // Make sure to import and provide the correct options
-          styles={customStyles}
-          menuPlacement="top"
-        />
+        <ColorBox />
       </div>
     </div>
   );

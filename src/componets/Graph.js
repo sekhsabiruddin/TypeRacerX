@@ -1,5 +1,6 @@
 import React from "react";
 import "chart.js/auto";
+import { useTheme } from "../Context/ThemeContext";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -15,7 +16,6 @@ import { Line } from "react-chartjs-2";
 ChartJS.register(
   CategoryScale,
   LinearScale,
-
   LineElement,
   Title,
   Tooltip,
@@ -23,7 +23,7 @@ ChartJS.register(
 );
 
 const Graph = ({ graphData }) => {
-  console.log("Graph data", graphData[0]);
+  const { theme } = useTheme();
   return (
     <>
       <Line
@@ -33,7 +33,7 @@ const Graph = ({ graphData }) => {
             {
               data: graphData.map((i) => i[1]),
               label: "wpm",
-              borderColor: "white",
+              borderColor: theme.typeBoxText, // Remove unnecessary syntax
             },
           ],
         }}

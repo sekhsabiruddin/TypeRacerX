@@ -86,7 +86,7 @@ const SingupForm = ({ handleClose }) => {
         onChange={(e) => setEmail(e.target.value)}
         InputLabelProps={{
           style: {
-            color: theme.textColor,
+            color: theme.typeTextColor,
           },
         }}
         InputProps={{
@@ -102,12 +102,12 @@ const SingupForm = ({ handleClose }) => {
         onChange={(e) => setPassword(e.target.value)}
         InputLabelProps={{
           style: {
-            color: theme.textColor,
+            color: theme.typeTextColor,
           },
         }}
         InputProps={{
           style: {
-            color: theme.textColor,
+            color: theme.typeTextColor,
           },
         }}
       />
@@ -118,19 +118,19 @@ const SingupForm = ({ handleClose }) => {
         onChange={(e) => setConfirmPassword(e.target.value)}
         InputLabelProps={{
           style: {
-            color: theme.textColor,
+            color: theme.typeTextColor,
           },
         }}
         InputProps={{
           style: {
-            color: theme.textColor,
+            color: theme.typeTextColor,
           },
         }}
       />
       <Button
         variant="contained"
         size="large"
-        style={{ backgroundColor: theme.textColor }}
+        style={{ backgroundColor: theme.background, fontFamily: "Roboto Mono" }}
         onClick={handleSubmit}
       >
         singup

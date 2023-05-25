@@ -63,7 +63,7 @@ const LoginForm = ({ handleClose }) => {
         display: "flex",
         flexDirection: "column",
         gap: "20px",
-        background: "white",
+        background: "#fff",
       }}
     >
       <TextField
@@ -73,12 +73,13 @@ const LoginForm = ({ handleClose }) => {
         onChange={(e) => setEmail(e.target.value)}
         InputLabelProps={{
           style: {
-            color: theme.textColor,
+            color: theme.typeTextColor,
+            fontFamily: "Roboto mono",
           },
         }}
         InputProps={{
           style: {
-            color: theme.textColor,
+            color: theme.typeTextColor,
           },
         }}
       />
@@ -89,12 +90,12 @@ const LoginForm = ({ handleClose }) => {
         onChange={(e) => setPassword(e.target.value)}
         InputLabelProps={{
           style: {
-            color: theme.textColor,
+            color: theme.typeTextColor,
           },
         }}
         InputProps={{
           style: {
-            color: theme.textColor,
+            color: theme.typeTextColor,
           },
         }}
       />
@@ -103,7 +104,7 @@ const LoginForm = ({ handleClose }) => {
         onClick={handleSubmit}
         variant="contained"
         size="large"
-        style={{ backgroundColor: theme.textColor }}
+        style={{ backgroundColor: theme.background, fontFamily: "Roboto Mono" }}
       >
         Login
       </Button>

@@ -8,7 +8,7 @@ export const ThemeContextProvider = ({ children }) => {
   const defaultvalue =
     JSON.parse(localStorage.getItem("theme")) || themeOptions[0].value;
   const [theme, setTheme] = useState(defaultvalue);
-
+  console.log("theme", theme);
   const values = {
     theme,
     setTheme,
