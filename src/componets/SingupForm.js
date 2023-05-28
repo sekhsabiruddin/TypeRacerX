@@ -6,12 +6,14 @@ import TextField from "@mui/material/TextField";
 import { useTheme } from "../Context/ThemeContext";
 import { auth } from "../firebaseConfig";
 import { toast } from "react-toastify";
+import { errorMapping } from "../Utils/errorMapping";
+
 const SingupForm = ({ handleClose }) => {
   const { theme } = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirmPassword] = useState("");
-  //--------------------handle submit form
+  //--------------------handle submit form-------------------->
   const handleSubmit = () => {
     if (!email || !password || !confirm) {
       toast.warning("Fill all dettails", {
@@ -55,7 +57,8 @@ const SingupForm = ({ handleClose }) => {
         handleClose();
       })
       .catch((err) => {
-        toast.warning("Unable to create user. Please try again..", {
+        console.log("error code is ", err.code);
+        toast.error(errorMapping[err.code] || "some error occured", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -87,11 +90,14 @@ const SingupForm = ({ handleClose }) => {
         InputLabelProps={{
           style: {
             color: theme.typeTextColor,
+            fontFamily: "Lato",
+            fontSize: "15px",
           },
         }}
         InputProps={{
           style: {
             color: theme.textColor,
+            fontFamily: "Lato",
           },
         }}
       />
@@ -103,6 +109,7 @@ const SingupForm = ({ handleClose }) => {
         InputLabelProps={{
           style: {
             color: theme.typeTextColor,
+            fontFamily: "Lato",
           },
         }}
         InputProps={{
@@ -119,11 +126,13 @@ const SingupForm = ({ handleClose }) => {
         InputLabelProps={{
           style: {
             color: theme.typeTextColor,
+            fontFamily: "Lato",
           },
         }}
         InputProps={{
           style: {
             color: theme.typeTextColor,
+            fontFamily: "Lato",
           },
         }}
       />

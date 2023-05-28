@@ -5,7 +5,7 @@ export const GlobalStyles = createGlobalStyle`
   margin:0;
   padding:0;
   box-sizing:border-box;
-
+  
 
 }
   body {
@@ -17,15 +17,14 @@ export const GlobalStyles = createGlobalStyle`
     position:relative;
   }
 .canvas{
-  display:grid;
-  min-height:100vh;
-  grid-auto-flow:row;
-  grid-template-row:auto 1fr auto;
-  gap:0.5rem;
-  padding:2rem;
-  width:100vw;
-  align-item:center;
-  text-align:center;
+  display: grid;
+  min-height: 100vh;
+  grid-auto-flow: row;
+  gap: 0.5rem;
+  padding: 2rem;
+  text-align: center;
+ 
+ 
 }
 ${"" /* //css TypingBox css start here */}
 .type-box{
@@ -34,19 +33,14 @@ ${"" /* //css TypingBox css start here */}
   height:200px;
   margin-left:auto;
   margin-right:auto;
-  overflow:hidden;
-  
- 
+  overflow:hidden; 
 }
 .words{
   font-size:24px;
   display:flex;
   flex-wrap:wrap;
- 
   font-family: 'Roboto Mono', monospace;
- 
   color:${({ theme }) => theme.typeBoxText};
-
 }
 .custom-icon{
   cursor: pointer;
@@ -56,16 +50,14 @@ ${"" /* //css TypingBox css start here */}
   padding-right:5px;
   }
 
-  
 .hidden-input{
-  opacity:0; 
+ opacity: 0;
 }
 .current {
   border-left:3px solid #fff;
   height: 10px;
   animation: blinking 2s infinite;
 }
-
 @keyframes blinking {
   0% {
     border-left-color: white;
@@ -96,20 +88,18 @@ ${"" /* //css TypingBox css start here */}
     border-right-color: white;
   }
   25% {
-    border-right-color: black;
+    border-right-color: ${({ theme }) => theme.background};
   }
   50% {
     border-right-color: white;
   }
   75% {
-    border-right-color: black;
+    border-right-color: ${({ theme }) => theme.background};
   }
   100% {
     border-right-color: white;
   }
 } 
-
-
 
 
 .correct{
@@ -132,21 +122,19 @@ ${"" /* =======================UpperMenu.js */}
   padding: 0.5rem;
   font-family: 'Roboto Mono', monospace;
 }
-  .modes{
+.modes{
     display: flex;
-    gap:0.4rem;
-    
+    gap:0.4rem;    
   }
-  .time-mode:hover{
+.time-mode:hover{
     color:${({ theme }) => theme.typeBoxText};
-    cursor:pointer;
-    
+    cursor:pointer;    
   }
-  .selectMenu {
+.selectMenu {
   position: absolute;
   top: 50%;
   left: 25%;
- background:black;
+  background:black;
   z-index: 999;
   background-color: white;
   width:50%;
@@ -164,8 +152,7 @@ ${"" /* ==============>footer <==============*/}
 }
 .links{
   display: flex;
-    gap: 20px;
-
+  gap: 20px;
 }
 .links div span{
   margin-left:7px;
@@ -191,7 +178,6 @@ ${"" /* //=====================Stats css */}
   width:70%;
 }
 .title{
-
   font-size:32px;
   color:${({ theme }) => theme.typeBoxText}
 }
@@ -199,31 +185,28 @@ ${"" /* //=====================Stats css */}
   font-size:40px;
 }
 ${"" /* ==================>css for header<=================== */}
+
 .header{
   width:1000px;
   display:flex;
   justify-content:space-between;
   margin-left:auto;
-  margin-right:auto;
- 
+  margin-right:auto; 
 }
 .header .logo {
-
     display: flex;
-  
     column-gap: 15px;
     width:40%;
 }
 .header .logo-text{
   margin-top: -8px;
-    margin-left: 10px;
+  margin-left: 10px;
   font-size:32px;
   font-weight:400;
   font-family: 'Lexend Deca', sans-serif;
   color:${({ theme }) => theme.typeBoxText};
 }
 .header .logo-img{
-
   cursor:pointer;
   fill:${({ theme }) => theme.textColor};
   margin-top: 10px;
@@ -345,5 +328,58 @@ ${"" /* //============================color.js */}
 
 .modal-content::-webkit-scrollbar-thumb:hover {
   background-color: #555; /* Change the color of the thumb on hover */
+}
+.or{
+  display: block;
+  text-align: center;
+  font-family: "Helvetica";
+  color: black;
+}
+.accountcircleIcon:hover {
+  cursor: pointer;
+}
+.start-btn-box{
+  width:100%;
+
+  text-align: center;
+}
+.startBtn{
+
+  background-image: linear-gradient(#42A1EC, #0070C9);
+  border: 1px solid #0077CC;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  direction: ltr;
+  display: inline-block;
+  font-family: "SF Pro Text","SF Pro Icons","AOS Icons","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: -.022em;
+  line-height: 1.47059;
+  min-width: 30px;
+  overflow: visible;
+  padding: 4px 50px;
+  text-align: center;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+}
+.startBtn:hover{
+  background-image: linear-gradient(#51A9EE, #147BCD);
+  border-color: #1482D0;
+  text-decoration: none;
+}
+.startBtn:active{
+  background-image: linear-gradient(#3D94D9, #0067B9);
+  border-color: #006DBC;
+  outline: none;
+}
+.logout{
+  margin-left: 10px;
+  cursor:pointer;
 }
 `;

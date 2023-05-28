@@ -10,6 +10,10 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { toast } from "react-toastify";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import GoogleButton from "react-google-button";
+import Box from "@mui/material/Box";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { errorMapping } from "../Utils/errorMapping";
 const AccountCircle = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
@@ -32,6 +36,35 @@ const AccountCircle = () => {
 
   const handleValueChnage = (e, v) => {
     setValue(v);
+  };
+  const gooleProvider = new GoogleAuthProvider();
+  const handleGooleSingIn = () => {
+    signInWithPopup(auth, gooleProvider)
+      .then((res) => {
+        toast.success("Google login successful", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        handleClose();
+      })
+      .catch((err) => {
+        toast.error(errorMapping[err.code] || "not able to user google", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      });
   };
   //log in function
   const logout = () => {
@@ -65,8 +98,11 @@ const AccountCircle = () => {
 
   return (
     <div>
-      <AccountCircleIcon onClick={handleModalOpen} />
-      {user && <LogoutIcon onClick={logout} />}
+      <AccountCircleIcon
+        onClick={handleModalOpen}
+        className="accountcircleIcon"
+      />
+      {user && <LogoutIcon onClick={logout} className="logout" />}
       <Modal
         open={open}
         onClose={handleClose}
@@ -99,8 +135,22 @@ const AccountCircle = () => {
               ></Tab>
             </Tabs>
           </AppBar>
+
           {value === 0 && <LoginForm handleClose={handleClose} />}
           {value === 1 && <SingupForm handleClose={handleClose} />}
+          {value === 0 && (
+            <Box style={{ backgroundColor: "#fff", paddingBottom: "10px" }}>
+              <span className="or">OR</span>
+              <GoogleButton
+                style={{
+                  width: "100%",
+                  marginTop: "10px",
+                  fontFamily: "Helvetica",
+                }}
+                onClick={handleGooleSingIn}
+              />
+            </Box>
+          )}
         </div>
       </Modal>
     </div>

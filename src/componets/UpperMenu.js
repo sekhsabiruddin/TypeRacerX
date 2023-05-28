@@ -11,17 +11,17 @@ const UpperMenu = ({ countDown }) => {
     setTestTime(Number(e.target.id));
   };
   useEffect(() => {
-    setTestTime(5);
+    setTestTime(20);
   }, []);
   return (
     <div className="upper-menu">
       <div className="counter">{countDown}</div>
       <div className="modes">
-        <div className="time-mode" id={15} onClick={updateTime}>
-          15s
+        <div className="time-mode" id={20} onClick={updateTime}>
+          20s
         </div>
-        <div className="time-mode" id={30} onClick={updateTime}>
-          30s
+        <div className="time-mode" id={40} onClick={updateTime}>
+          40s
         </div>
         <div className="time-mode" id={60} onClick={updateTime}>
           60s

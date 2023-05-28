@@ -80,17 +80,42 @@ const dersertOasis = {
   textColor: "#D19D01",
   typeBoxText: "#669BED",
 };
-const dino = {
-  label: "dino",
-  background: "#FFFFFF",
-  textColor: "#40D672",
-  typeBoxText: "#D5D5D5",
-};
+
 const frozenLlma = {
   label: "frozen llma",
   background: "#9BF2EA",
   textColor: "#7052AB",
   typeBoxText: "#B690FD",
+};
+const godSpeed = {
+  label: "godspeed",
+  background: "#EAE4CF",
+  textColor: "#9ABBCD",
+  typeBoxText: "#646669",
+};
+const earthSong = {
+  label: "earthsong",
+  background: "#292521",
+  textColor: "#509452",
+  typeBoxText: "#F2AC2D",
+};
+const husky = {
+  label: "husky",
+  background: "#000000",
+  textColor: "#C58AFF",
+  typeBoxText: "#972FFF",
+};
+const maxican = {
+  label: "maxican",
+  background: "#F8AD34",
+  textColor: "#B12189",
+  typeBoxText: "#393633",
+};
+const miami = {
+  label: "maxican",
+  background: "#F35588",
+  textColor: "#8D0E38",
+  typeBoxText: "#05DFD7",
 };
 export const themeOptions = [
   { label: "blue dolpin", value: blueDolpin },
@@ -105,8 +130,11 @@ export const themeOptions = [
   { label: "dark magic girl", value: darkMagicGirl },
   { label: "darling", value: darling },
   { label: "dersert oasis", value: dersertOasis },
-  { label: "dino", value: dino },
   { label: "frozen llma", value: frozenLlma },
-
   { label: "Fledging", value: fledging },
+  { label: "godspeed", value: godSpeed },
+  { label: "earthsong", value: earthSong },
+  { label: "husky", value: husky },
+  { label: "maxican", value: maxican },
+  { label: "miami", value: miami },
 ];

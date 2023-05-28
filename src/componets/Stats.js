@@ -8,7 +8,7 @@ const Stats = ({
   wpm,
   accuracy,
   correctChars,
-  incorrectChars,
+  incorrectChar,
   missedChars,
   extraChars,
   graphData,
@@ -43,7 +43,7 @@ const Stats = ({
         wpm: wpm,
         accuracy: accuracy,
         timeStamp: new Date(),
-        characters: `${correctChars}/${incorrectChars}/${missedChars}/${extraChars}`,
+        characters: `${correctChars}/${incorrectChar}/${missedChars}/${extraChars}`,
         userId: uid,
       })
       .then((res) => {
@@ -73,8 +73,6 @@ const Stats = ({
   };
 
   useEffect(() => {
-    debugger;
-    console.log("auth", auth.currentUser);
     if (auth.currentUser) {
       pushDataToDB();
     } else {
@@ -96,10 +94,12 @@ const Stats = ({
         <div className="title">WPM</div>
         <div className="subtitle">{wpm}</div>
         <div className="title">Accuracy</div>
-        <div className="subtitle">{accuracy}</div>
+        <div className="subtitle">
+          {isNaN(accuracy) || !isFinite(accuracy) ? "0" : accuracy}
+        </div>
         <div className="title">Characters</div>
         <div className="subtitle">
-          {correctChars}/{incorrectChars}/{missedChars}/{extraChars}
+          {correctChars}/{incorrectChar}/{missedChars}/{extraChars}
         </div>
         <div></div>
       </div>

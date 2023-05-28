@@ -6,7 +6,7 @@ import { useTheme } from "../Context/ThemeContext";
 import { auth } from "../firebaseConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { errorMapping } from "../Utils/errorMapping";
 const LoginForm = ({ handleClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -42,8 +42,8 @@ const LoginForm = ({ handleClose }) => {
         });
         handleClose();
       })
-      .catch((e) => {
-        toast.error("Invalid creditials", {
+      .catch((err) => {
+        toast.error(errorMapping[err.code] || "Invalid creditials", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -74,12 +74,13 @@ const LoginForm = ({ handleClose }) => {
         InputLabelProps={{
           style: {
             color: theme.typeTextColor,
-            fontFamily: "Roboto mono",
+            fontFamily: "Lato",
           },
         }}
         InputProps={{
           style: {
             color: theme.typeTextColor,
+            fontFamily: "Lato",
           },
         }}
       />
@@ -91,6 +92,7 @@ const LoginForm = ({ handleClose }) => {
         InputLabelProps={{
           style: {
             color: theme.typeTextColor,
+            fontFamily: "Lato",
           },
         }}
         InputProps={{
