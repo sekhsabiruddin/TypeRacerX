@@ -7,6 +7,7 @@ import { auth } from "../firebaseConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { errorMapping } from "../Utils/errorMapping";
+
 const LoginForm = ({ handleClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,8 +15,9 @@ const LoginForm = ({ handleClose }) => {
   const { theme } = useTheme();
 
   const handleSubmit = () => {
+    console.log("email", email, "password", password);
     if (!email || !password) {
-      toast.warning("Fill all dettails", {
+      toast.warning("Fill all details", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -27,9 +29,14 @@ const LoginForm = ({ handleClose }) => {
       });
       return;
     }
+
     auth
-      .signInWithEmailAndPassword(email, password)
-      .then((res) => {
+      .createUserWithEmailAndPassword(email, password)
+      .then((createdUser) => {
+        // User account successfully created, now sign in
+        return auth.signInWithEmailAndPassword(email, password);
+      })
+      .then((signedInUser) => {
         toast.success("Logged in", {
           position: "top-right",
           autoClose: 3000,
@@ -43,7 +50,8 @@ const LoginForm = ({ handleClose }) => {
         handleClose();
       })
       .catch((err) => {
-        toast.error(errorMapping[err.code] || "Invalid creditials", {
+        console.log(err.code);
+        toast.error(errorMapping[err.code] || "Invalid credentials", {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,

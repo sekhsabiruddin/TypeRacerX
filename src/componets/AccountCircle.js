@@ -35,6 +35,7 @@ const AccountCircle = () => {
   };
 
   const handleValueChnage = (e, v) => {
+    console.log("e is ", e, "value is v", v);
     setValue(v);
   };
   const gooleProvider = new GoogleAuthProvider();

@@ -36,6 +36,7 @@ const TypingBox = () => {
   }, [wordsArray]);
   //================>setTimer start here Function <=================
   const startTimer = () => {
+    console.log("I am timer")
     const intervalId = setInterval(timer, 1000);
     setIntervalId(intervalId);
     function timer() {
@@ -98,6 +99,7 @@ const TypingBox = () => {
   //**************************HandeleUseinout ********************* */
   const handleUserInput = (e) => {
     const allCurrChars = wordSpanRef[currWordIndex].current.childNodes;
+    console.log("All the char ");
     if (!testStart) {
       startTimer();
       setTestStart(true);

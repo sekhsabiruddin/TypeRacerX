@@ -14,6 +14,7 @@ const Stats = ({
   graphData,
 }) => {
   //remove duplicate value Start here
+  console.log("grap data", graphData);
   let timeSet = new Set();
   const newGraph = graphData.filter((i) => {
     if (!timeSet.has(i[0])) {
